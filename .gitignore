@@ -1,0 +1,21 @@
+# Ansible log files
+ansible.log
+*.log
+
+# Inventory files (environment-specific)
+inventory.ini
+inventory.local.ini
+
+# Ansible retry files
+*.retry
+
+# Vault files
+*.vault
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db

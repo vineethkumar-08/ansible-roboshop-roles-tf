@@ -1,0 +1,42 @@
+- name: app-setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_setup.yaml
+
+
+- name: java-setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: java_setup.yaml
+
+- name: systemd_setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd_setup.yaml
+
+- name: Install python dependencies
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    executable: pip3.9
+  loop:
+  - cryptography
+  - PyMySQL
+  
+- name: import shipping data
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    login_host: "{{ MYSQL_HOST }}"
+    login_user: root
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    target: "{{ item}}"
+  loop:
+  - /app/db/schema.sql 
+  - /app/db/app-user.sql 
+  - /app/db/master-data.sql
+
+- name: start and enable
+  ansible.builtin.service:
+    name: shipping
+    state: restarted
+    enabled: yes
