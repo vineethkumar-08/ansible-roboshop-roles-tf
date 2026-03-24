@@ -11,3 +11,4 @@ RABBITMQ_HOST: rabbitmq-"{{ env }}".devopspractice08.online
 MYSQL_HOST: mysql-"{{ env }}".devopspractice08.online
 SHIPPING_HOST: shipping-"{{ env }}".devopspractice08.online
 CART_HOST: cart-"{{ env }}".devopspractice08.online
+app_version : v3
