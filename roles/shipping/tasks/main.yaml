@@ -21,6 +21,8 @@
   loop:
   - cryptography
   - PyMySQL
+  - boto3
+  - botocore
   
 - name: import shipping data
   community.mysql.mysql_db:
